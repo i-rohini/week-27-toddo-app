@@ -2,7 +2,7 @@
 ## Push the Docker image to docker hub
 ## SSH into our VM and start the new image 
 
-name: Deploy websocket
+name: Deploy to ws
 on:
   push:
     branches: [ main ]
@@ -23,6 +23,8 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: .
-          file: docker/Dockerfile.websocket
+          file: docker/Dockerfile.ws
+          build-args: 
+              DATABASE2_URL=${{ secrets.DATABASE2_URL }}
           push: true
-          tags: rohinigarg/todo-app-websocket:${{ github.sha }}    
+          tags: rohinigarg/todo-app-ws:${{ github.sha }}    
